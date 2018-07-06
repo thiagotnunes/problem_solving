@@ -41,7 +41,7 @@ public class Merge {
                 buffer[k] = array[j++];
             } else if (j > hi) {
                 buffer[k] = array[i++];
-            } else if (array[i] < array[j]) {
+            } else if (array[i] <= array[j]) {
                 buffer[k] = array[i++];
             } else {
                 buffer[k] = array[j++];
