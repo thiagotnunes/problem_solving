@@ -1,6 +1,8 @@
 package sorting.exercises.exercise_9;
 
 /**
+ * Describe pros and cons of heap, merge and quick sort.
+ *
  * Heap sort
  * Pros:
  *  + Time complexity is always O(nlogn)
