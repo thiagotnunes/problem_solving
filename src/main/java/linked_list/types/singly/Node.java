@@ -26,7 +26,6 @@ public class Node {
 
     @Override
     public int hashCode() {
-
-        return Objects.hash(data, next);
+        return 31 * data;
     }
 }

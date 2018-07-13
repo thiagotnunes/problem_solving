@@ -6,8 +6,8 @@ import java.util.Iterator;
  * Doubly linked list
  */
 public class LinkedList implements Iterable<Integer> {
-    public Node head;
-    public Node tail;
+    private Node head;
+    private Node tail;
     private int length;
 
     @Override
@@ -71,18 +71,16 @@ public class LinkedList implements Iterable<Integer> {
         return size() == 0;
     }
 
-    public static void main(String[] args) {
-        LinkedList list = new LinkedList();
+    public Node getHead() {
+        return head;
+    }
 
-        list.addLast(5);
-        list.addLast(4);
-        list.addLast(6);
-        list.addLast(3);
-        list.addLast(7);
-        list.addLast(8);
+    public static void print(Node head) {
+        Node current = head;
 
-        for (Integer e : list) {
-            System.out.println(e);
+        while (current != null) {
+            System.out.println(current.data);
+            current = current.next;
         }
     }
 }
