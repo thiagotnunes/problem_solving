@@ -7,7 +7,6 @@ import java.util.HashSet;
 /**
  * When a linked list with a loop is given, return the number
  * of nodes in the list
- * TODO: Find out how to break loop
  */
 public class Solution {
     /**
@@ -33,6 +32,42 @@ public class Solution {
         return count;
     }
 
+    /**
+     * Floyd's algorithm
+     * Time complexity - O(n)
+     * Space complexity - O(1)
+     */
+    public int solve2(Node head) {
+        Node slow = head;
+        Node fast = head;
+
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+            if (slow == fast) {
+                break;
+            }
+        }
+
+        if (fast != null) {
+            Node current = head;
+            while (current.next != slow.next) {
+                current = current.next;
+                slow = slow.next;
+            }
+            slow.next = null;
+        }
+
+        int length = 0;
+        Node current = head;
+        while (current != null) {
+            current = current.next;
+            length++;
+        }
+
+        return length;
+    }
+
     public static void main(String[] args) {
         Solution solution = new Solution();
 
@@ -50,6 +85,6 @@ public class Solution {
         five.next = six;
         six.next = four;
 
-        System.out.println(solution.solve1(one));
+        System.out.println(solution.solve2(one));
     }
 }

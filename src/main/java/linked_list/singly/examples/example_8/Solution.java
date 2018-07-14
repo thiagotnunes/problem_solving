@@ -5,10 +5,37 @@ import linked_list.types.singly.Node;
 
 /**
  * Remove loop from linked list
- * TODO: Implement, find the beginning of the loop
  */
 public class Solution {
-    public void solve1(Node head) {}
+    /**
+     * Slow and fast pointers
+     * Floyd's algorithm
+     * Time complexity - O(n)
+     * Space complexity - O(1)
+     */
+    public void solve1(Node head) {
+        Node slow = head;
+        Node fast = head;
+
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+
+            if (slow == fast) {
+                break;
+            }
+        }
+
+        if (fast == null) return;
+
+        Node current = head;
+        while (current.next != slow.next) {
+            current = current.next;
+            slow = slow.next;
+        }
+
+        slow.next = null;
+    }
 
     public static void main(String[] args) {
         Solution solution = new Solution();
@@ -25,6 +52,7 @@ public class Solution {
         three.next = four;
         four.next = five;
         five.next = six;
+        six.next = three;
 
         solution.solve1(one);
 
