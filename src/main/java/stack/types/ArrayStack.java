@@ -1,34 +1,33 @@
 package stack.types;
 
-public class ArrayStack implements Stack<Integer> {
+public class ArrayStack<T> implements Stack<T> {
     private final int capacity;
     private int top;
-    private Integer[] stack;
+    private T[] stack;
 
+    @SuppressWarnings("unchecked")
     public ArrayStack(int capacity) {
         this.capacity = capacity;
-        this.stack = new Integer[capacity + 1];
+        this.stack = (T[]) new Object[capacity + 1];
         this.top = -1;
     }
 
     @Override
-    public void push(Integer e) {
+    public void push(T e) {
         if (top >= capacity - 1) throw new RuntimeException("Stack is full");
 
         stack[++top] = e;
     }
 
     @Override
-    public Integer pop() {
+    public T pop() {
         if (top < 0) throw new RuntimeException("Stack is empty");
 
-        Integer e = stack[top--];
-
-        return e;
+        return stack[top--];
     }
 
     @Override
-    public Integer top() {
+    public T top() {
         if (top < 0) throw new RuntimeException("Stack is empty");
 
         return stack[top];

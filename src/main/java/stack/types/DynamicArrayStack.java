@@ -2,9 +2,9 @@ package stack.types;
 
 import java.util.ArrayList;
 
-public class DynamicArrayStack implements Stack<Integer> {
+public class DynamicArrayStack<T> implements Stack<T> {
     private int top;
-    private ArrayList<Integer> stack;
+    private ArrayList<T> stack;
 
     public DynamicArrayStack() {
         this.top = -1;
@@ -12,19 +12,19 @@ public class DynamicArrayStack implements Stack<Integer> {
     }
 
     @Override
-    public void push(Integer e) {
+    public void push(T e) {
         stack.add(++top, e);
     }
 
     @Override
-    public Integer pop() {
+    public T pop() {
         if (top < 0) throw new RuntimeException("Stack is empty");
 
         return stack.get(top--);
     }
 
     @Override
-    public Integer top() {
+    public T top() {
         if (top < 0) throw new RuntimeException("Stack is empty");
 
         return stack.get(top);
