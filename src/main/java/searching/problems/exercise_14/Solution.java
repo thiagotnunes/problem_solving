@@ -4,7 +4,6 @@ import java.util.Arrays;
 
 /**
  * Find median of two sorted arrays
- * TODO: Implement algorithm with sublinear solution
  */
 public class Solution {
     /**
@@ -46,5 +45,68 @@ public class Solution {
         }
 
         return newArray[newArray.length / 2];
+    }
+
+    /**
+     * Binary search
+     * Time complexity - O(logn)
+     * Space complexity - O(1)
+     */
+    public double solve3(int[] array1, int[] array2) {
+        int n = array1.length;
+        int m = array2.length;
+        int minLength;
+        int maxLength;
+        int start;
+        int end;
+        int xLo;
+        int xHi;
+        int yLo;
+        int yHi;
+
+        if (n <= m) {
+            minLength = n;
+            maxLength = m;
+        } else {
+            int[] tmp = array1;
+            array1 = array2;
+            array2 = tmp;
+            minLength = m;
+            maxLength = n;
+        }
+
+        start = 0;
+        end = minLength;
+        while (true) {
+            int partition1 = (start + end) / 2;
+            int partition2 = (minLength + maxLength + 1) / 2 - partition1;
+            xLo = partition1 > 0 ? array1[partition1 - 1] : Integer.MIN_VALUE;
+            xHi = partition1 < minLength ? array1[partition1] : Integer.MAX_VALUE;
+            yLo = partition2 > 0 ? array2[partition2 - 1] : Integer.MIN_VALUE;
+            yHi = partition2 < maxLength ? array2[partition2] : Integer.MAX_VALUE;
+
+            if (xLo <= yHi && yLo <= xHi) {
+                break;
+            } else if (xLo > yHi) {
+                end = partition1 - 1;
+            } else {
+                start = partition1 + 1;
+            }
+        }
+
+        if ((minLength + maxLength) % 2 == 0) {
+            return (Math.max(xLo, yLo) + Math.min(xHi, yHi)) / 2.0;
+        } else {
+            return Math.max(xLo, yLo);
+        }
+    }
+
+    public static void main(String[] args) {
+        Solution solution = new Solution();
+
+        int[] array1 = new int[]{23, 26, 31, 35};
+        int[] array2 = new int[]{3, 5, 7, 9, 11, 16};
+
+        System.out.println(solution.solve3(array1, array2));
     }
 }
