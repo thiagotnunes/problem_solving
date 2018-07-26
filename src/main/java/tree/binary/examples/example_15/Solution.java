@@ -4,7 +4,6 @@ import tree.binary.examples.ExampleTree;
 import tree.types.binary.Node;
 
 import java.util.ArrayDeque;
-import java.util.Iterator;
 
 /**
  * Print all the paths from root to leaves
