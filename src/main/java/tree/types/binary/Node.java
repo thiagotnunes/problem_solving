@@ -3,7 +3,8 @@ package tree.types.binary;
 import java.util.Objects;
 
 public class Node<T> {
-    public final T data;
+    public
+    T data;
     public Node<T> left;
     public Node<T> right;
 
