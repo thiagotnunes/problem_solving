@@ -3,8 +3,8 @@ package priority_queue.types;
 public class MaxHeap {
 
     private int length;
-    private final int capacity;
-    private final int[] heap;
+    private int capacity;
+    private int[] heap;
 
     private MaxHeap(int[] array) {
         this.length = array.length;
@@ -26,6 +26,7 @@ public class MaxHeap {
     // O(logn)
     public int extractMax() {
         if (isEmpty()) throw new RuntimeException("heap is empty");
+        if (length < capacity / 3) shrink();
 
         int max = heap[0];
         heap[0] = heap[--length];
@@ -44,7 +45,7 @@ public class MaxHeap {
 
     // O(logn)
     public void add(int e) {
-        if (length == capacity) throw new RuntimeException("heap is full");
+        if (length == capacity) expand();
 
         heap[length] = e;
         siftUp(heap, length);
@@ -59,6 +60,33 @@ public class MaxHeap {
     // O(1)
     public int size() {
         return length;
+    }
+
+    // O(1)
+    public int[] getArray() {
+        return heap;
+    }
+
+    // O(n)
+    private void expand() {
+        int newCapacity = capacity * 2;
+        int[] newHeap = new int[newCapacity];
+
+        System.arraycopy(heap, 0, newHeap, 0, capacity);
+
+        capacity = newCapacity;
+        heap = newHeap;
+    }
+
+    // O(n)
+    private void shrink() {
+        int newCapacity = capacity / 2;
+        int[] newHeap = new int[newCapacity];
+
+        System.arraycopy(heap, 0, newHeap, 0, newCapacity);
+
+        capacity = newCapacity;
+        heap = newHeap;
     }
 
     // O(logn)
@@ -76,7 +104,7 @@ public class MaxHeap {
             array[i] = left;
             array[leftI] = parent;
             siftDown(array, size, leftI);
-        } else if (max > parent && max == right) {
+        } else if (max > parent) {
             array[i] = right;
             array[rightI] = parent;
             siftDown(array, size, rightI);
