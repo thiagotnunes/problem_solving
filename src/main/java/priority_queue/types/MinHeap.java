@@ -5,10 +5,14 @@ public class MinHeap {
     private int capacity;
     private int[] heap;
 
-    private MinHeap(int[] heap) {
-        this.length = heap.length;
-        this.capacity = heap.length;
+    private MinHeap(int[] heap, int length, int capacity) {
+        this.length = length;
+        this.capacity = capacity;
         this.heap = heap;
+    }
+
+    public static MinHeap create(int capacity) {
+        return new MinHeap(new int[capacity], 0, capacity);
     }
 
     // O(n)
@@ -19,11 +23,11 @@ public class MinHeap {
             siftDown(array, n, i);
         }
 
-        return new MinHeap(array);
+        return new MinHeap(array, n, n);
     }
 
     // O(logn)
-    public int extractMin() {
+    public int extract() {
         if (isEmpty()) throw new RuntimeException("heap is empty");
         if (length < capacity / 3) shrink();
 
@@ -37,7 +41,7 @@ public class MinHeap {
     }
 
     // O(1)
-    public int getMin() {
+    public int peek() {
         if (isEmpty()) throw new RuntimeException("heap is empty");
 
         return heap[0];

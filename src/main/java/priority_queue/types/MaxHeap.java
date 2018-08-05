@@ -6,10 +6,14 @@ public class MaxHeap {
     private int capacity;
     private int[] heap;
 
-    private MaxHeap(int[] array) {
-        this.length = array.length;
-        this.capacity = array.length;
-        this.heap = array;
+    private MaxHeap(int[] heap, int length, int capacity) {
+        this.length = length;
+        this.capacity = capacity;
+        this.heap = heap;
+    }
+
+    public static MaxHeap create(int capacity) {
+        return new MaxHeap(new int[capacity], 0, capacity);
     }
 
     // O(n)
@@ -20,11 +24,11 @@ public class MaxHeap {
             siftDown(array, n, i);
         }
 
-        return new MaxHeap(array);
+        return new MaxHeap(array, n, n);
     }
 
     // O(logn)
-    public int extractMax() {
+    public int extract() {
         if (isEmpty()) throw new RuntimeException("heap is empty");
         if (length < capacity / 3) shrink();
 
@@ -37,7 +41,7 @@ public class MaxHeap {
     }
 
     // O(1)
-    public int getMax() {
+    public int peek() {
         if (isEmpty()) throw new RuntimeException("heap is empty");
 
         return heap[0];
