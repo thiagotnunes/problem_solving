@@ -1,4 +1,4 @@
-package hash_map.types.open_addressing;
+package hash_map.types;
 
 public interface IMap<K, V> {
     boolean insert(K key, V value);

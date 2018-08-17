@@ -1,4 +1,4 @@
-package hash_map.types.open_addressing;
+package hash_map.types;
 
 import java.lang.reflect.Array;
 
