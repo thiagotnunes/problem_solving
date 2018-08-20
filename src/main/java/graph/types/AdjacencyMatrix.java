@@ -122,16 +122,10 @@ public class AdjacencyMatrix implements Graph {
         return edges;
     }
 
-    // Time complexity - O(V)
+    // Time complexity - O(1)
     @Override
-    public Iterable<Integer> allVertices() {
-        ArrayList<Integer> allVertices = new ArrayList<>();
-
-        for (int i = 0; i < vertices; i++) {
-            allVertices.add(i);
-        }
-
-        return allVertices;
+    public int numberOfVertices() {
+        return vertices;
     }
 
     // Time complexity - O(1)

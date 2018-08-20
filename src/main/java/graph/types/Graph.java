@@ -17,7 +17,7 @@ public interface Graph {
 
     Iterable<Edge> allEdges();
 
-    Iterable<Integer> allVertices();
+    int numberOfVertices();
 
     int inDegree(int v);
 

@@ -1,6 +1,5 @@
 package graph.types;
 
-import org.hamcrest.CoreMatchers;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -145,8 +144,8 @@ public class GraphTest {
     }
 
     @Test
-    public void returnsAllVertices() {
-        assertThat(graph.allVertices(), hasItems(0, 1, 2, 3, 4, 5, 6, 7, 8, 9));
+    public void returnsNumberOfVertices() {
+        assertThat(graph.numberOfVertices(), equalTo(10));
     }
 
     @Test
